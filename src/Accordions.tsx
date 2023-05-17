@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Howl } from 'howler';
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -12,6 +13,12 @@ export default function Accordions() {
     (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
     };
+    const handleClick = () => {
+      const beep = new Howl({ src :[ '22261.mp3']});
+     //to play
+      beep.play();
+
+    }
 
   const accordionItems = [
     {
@@ -86,11 +93,13 @@ export default function Accordions() {
           expanded={expanded === item.id}
           onChange={handleChange(item.id)}
           sx={{ marginBottom: "1em" }}
+          onClick={handleClick}
         >
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls={`${item.id}-content`}
             id={`${item.id}-header`}
+
           >
             <Typography sx={{ width: "33%", flexShrink: 1 }}>
               {item.summary}
